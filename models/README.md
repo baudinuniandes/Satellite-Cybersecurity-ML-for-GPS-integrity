@@ -3,6 +3,7 @@
 Este directorio aloja los algoritmos de Machine Learning entrenados y listos para ser desplegados—específicamente el **modelo RandomForest final** y el **scaler** utilizado para normalizar características en inferencia. A continuación se detallan los archivos y su propósito:
 
 models/
+
 ├── rf_final_model.pkl
 
 └── scaler.pkl
@@ -63,7 +64,7 @@ models/
   X_scaled = scaler.transform(X_raw)  # X_raw: array 2D (1, 7)
 
 - **Notas Adicionales**
-- Integridad de archivos:
--   Ambos .pkl se generaron en Google Colab utilizando joblib.dump(...) en la celda final del notebook 01_training_pipeline.ipynb.
--   Verificar que la versión de scikit-learn en Raspberry Pi coincide (o sea compatible) con la usada en Colab (preferiblemente scikit-learn 1.2.x).
+  Integridad de archivos:
+  - Ambos .pkl se generaron en Google Colab utilizando joblib.dump(...) en la celda final del notebook 01_training_pipeline.ipynb.
+  - Verificar que la versión de scikit-learn en Raspberry Pi coincide (o sea compatible) con la usada en Colab (preferiblemente scikit-learn 1.2.x).
 
