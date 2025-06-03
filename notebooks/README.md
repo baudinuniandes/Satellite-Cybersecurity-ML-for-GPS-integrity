@@ -1,8 +1,10 @@
 # Carpeta `notebooks/`
 
-Este directorio contiene los cuadernos de Jupyter (Google Colab) donde se desarrollan, entrenan y evalúan los modelos de Machine Learning para detección de integridad GPS. Cada notebook está documentado con referencias a las fuentes académicas utilizadas y sigue la metodología de limpieza, generación de anomalías, afinación de hiperparámetros y evaluación.
+Este directorio contiene los cuadernos de Jupyter (Google Colab) donde se desarrollan, entrenan y evalúan los modelos de Machine Learning para detección de integridad GPS. Cada notebook está documentado con referencias a las fuentes académicas utilizadas y sigue la metodología de limpieza, generación de anomalías, afinación de hiperparámetros y evaluación. Se deseñaron en Google Colab, con la facilidad de no instalar librerias adicionales en la arquitectura local.
+
 
 notebooks/
+
 ├── 01_training_pipeline.ipynb
 
 └── 02_model_selection_and_evaluation.ipynb
@@ -36,8 +38,7 @@ notebooks/
   5. **Generación de Etiquetas Sintéticas:**  
      - Si el CSV no contiene `Label`, inyecta anomalías en el 20 % de las filas:  
        - Desplazamiento gaussiano en latitud/longitud (spoofing)  
-       - Outliers en altitud y velocidad (jamming)  
-     - Referencia: Sarang (2023, p.43)  
+       - Outliers en altitud y velocidad (jamming) 
   6. **Normalización de Features:**  
      - Ajuste de `StandardScaler` sobre `X_train`  
      - Transformación de `X_val` y `X_test`  
@@ -47,8 +48,7 @@ notebooks/
        - `max_depth`: [None, 10, 20, 30]  
        - `max_features`: ['sqrt', 'log2']  
        - `min_samples_split`: [2, 5, 10]  
-     - Configuración: `cv=3`, `scoring="roc_auc"`, `n_jobs=-1`  
-     - Referencia: Sarang (2023, p.48) y Amr (2020, pp.95–97)  
+     - Configuración: `cv=3`, `scoring="roc_auc"`, `n_jobs=-1` 
   8. **Resultados de GridSearchCV:**  
      - Mejores hiperparámetros (`best_params_`) y métrica ROC AUC (`best_score_`)  
   9. **Evaluación en Validación:**  
@@ -86,14 +86,13 @@ notebooks/
      - Verificación de consistencia con valores esperados (params threshold, etc.).  
   7. **Conclusión y Próximos Pasos:**  
      - Plan de despliegue en Raspberry Pi (inferencia con tlfte/cpu).  
-     - Posibles mejoras: quantization, pruning, ensambles mixtos.
 
 ---
 
 ## Notas Generales
 
-- Ambos notebooks están listos para correr directamente en Google Colab y contienen **celdas de texto** y **celdas de código** que implementan los pasos descritos en la metodología.  
+- Ambos notebooks están listos para correr directamente en Google Colab y contienen **celdas de texto** y **celdas de código** que implementan los pasos descritos en la metodología, explicando de forma general para que se utiliza cada sección del codigo.  
 - La numeración de las celdas y los comentarios en cada bloque de código facilitan la trazabilidad entre lo que se hace en el notebook.  
-- Asegúrate de subir los archivos CSV (`train_data.csv`, `val_data.csv`, `test_data.csv`) a Colab antes de ejecutar las celdas de carga de datos.  
+- Se pueden remplazar los archivos CSV (`train_data.csv`, `val_data.csv`, `test_data.csv`) y cargarlos a Google Colab antes de ejecutar las celdas de carga de datos.  
 - Los notebooks generan el modelo final (`rf_final_model.pkl`) y el scaler (`scaler.pkl`) en la raíz del entorno de Colab para que luego puedan ser descargados o usados directamente en Raspberry Pi.
 
