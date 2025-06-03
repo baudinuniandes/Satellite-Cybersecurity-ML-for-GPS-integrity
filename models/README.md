@@ -2,11 +2,11 @@
 
 Este directorio aloja los algoritmos de Machine Learning entrenados y listos para ser desplegados—específicamente el **modelo RandomForest final** y el **scaler** utilizado para normalizar características en inferencia. A continuación se detallan los archivos y su propósito:
 
+```text
 models/
-
-├── rf_final_model.pkl
-
-└── scaler.pkl
+  ├── rf_final_model.pkl
+  └── scaler.pkl
+```
 
 ---
 
