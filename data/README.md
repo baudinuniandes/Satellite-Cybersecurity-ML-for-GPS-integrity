@@ -8,7 +8,7 @@ Este directorio contiene todos los conjuntos de datos utilizados para entrenar, 
 │   ├── train_data.csv               # 7 500 muestras reales + etiquetas sintéticas de spoofing
 │   ├── val_data.csv                 # Datos de validación (vuelo marzo 2025) + etiquetas
 │   └── test_data.csv                # Datos de prueba independientes + etiquetas
-
+```
 
 ## 1. `train_data.csv`
 
