@@ -2,12 +2,11 @@
 
 Este directorio contiene los cuadernos de Jupyter (Google Colab) donde se desarrollan, entrenan y evalúan los modelos de Machine Learning para detección de integridad GPS. Cada notebook está documentado con referencias a las fuentes académicas utilizadas y sigue la metodología de limpieza, generación de anomalías, afinación de hiperparámetros y evaluación. Se deseñaron en Google Colab, con la facilidad de no instalar librerias adicionales en la arquitectura local.
 
-
+```text
 notebooks/
-
-├── 01_training_pipeline.ipynb
-
-└── 02_model_selection_and_evaluation.ipynb
+  ├── 01_training_pipeline.ipynb
+  └── 02_model_selection_and_evaluation.ipynb
+```
 
 ---
 
