@@ -15,46 +15,46 @@ notebooks/
 
 - **Propósito:**  
   Implementar todo el flujo de entrenamiento paso a paso en Google Colab:
-  1. Limpieza de datos (Aceves-Fernandez, 2023, p.86)  
-  2. Transformación y extracción de features de navegación (Barua et al., 2024, pp.120–123)  
-  3. Generación de etiquetas sintéticas de spoofing/jamming (Sarang, 2023, p.43)  
-  4. División en conjuntos de entrenamiento, validación y prueba (Amr, 2020, p.54)  
-  5. Normalización con `StandardScaler`  
-  6. Búsqueda de hiperparámetros para RandomForest con `GridSearchCV`  
-  7. Cálculo de métricas básicas (accuracy, precision, recall, f1, AUC, confusion matrix)
+  1 Limpieza de datos.  
+  2 Transformación y extracción de features de navegación.  
+  3 Generación de etiquetas sintéticas de spoofing/jamming.  
+  4 División en conjuntos de entrenamiento, validación y prueba.  
+  5 Normalización con `StandardScaler`  
+  6 Búsqueda de hiperparámetros para RandomForest con `GridSearchCV`  
+  7 Cálculo de métricas básicas (accuracy, precision, recall, f1, AUC, confusion matrix)
 
 - **Secciones Principales:**  
-  1. **Instalación de Dependencias:**  
+  1 **Instalación de Dependencias:**  
      - `pip install pandas numpy scikit-learn joblib xgboost lightgbm`  
-  2. **Carga de Datos (`train_data.csv`, `val_data.csv`, `test_data.csv`):**  
+  2 **Carga de Datos (`train_data.csv`, `val_data.csv`, `test_data.csv`):**  
      - Lectura con `pd.read_csv(…, parse_dates=["UTC"])`  
      - Verificación de forma y primeras filas  
-  3. **Limpieza de Datos:**  
+  3 **Limpieza de Datos:**  
      - Eliminación de duplicados y valores nulos en columnas críticas (`Latitude`, `Longitude`, `Altitude`, `Speed`, `Direction`)  
-  4. **Ingeniería de Features:**  
+  4 **Ingeniería de Features:**  
      - Extracción de componentes `hour` y `minute` desde `UTC`  
      - Construcción del DataFrame con columnas:  
        `["Latitude", "Longitude", "Altitude", "Speed", "Direction", "hour", "minute"]`  
-  5. **Generación de Etiquetas Sintéticas:**  
+  5 **Generación de Etiquetas Sintéticas:**  
      - Si el CSV no contiene `Label`, inyecta anomalías en el 20 % de las filas:  
        - Desplazamiento gaussiano en latitud/longitud (spoofing)  
        - Outliers en altitud y velocidad (jamming) 
-  6. **Normalización de Features:**  
+  6 **Normalización de Features:**  
      - Ajuste de `StandardScaler` sobre `X_train`  
      - Transformación de `X_val` y `X_test`  
-  7. **GridSearchCV para RandomForest:**  
+  7 **GridSearchCV para RandomForest:**  
      - Parámetros a explorar:  
        - `n_estimators`: [200, 500, 1000]  
        - `max_depth`: [None, 10, 20, 30]  
        - `max_features`: ['sqrt', 'log2']  
        - `min_samples_split`: [2, 5, 10]  
      - Configuración: `cv=3`, `scoring="roc_auc"`, `n_jobs=-1` 
-  8. **Resultados de GridSearchCV:**  
+  8 **Resultados de GridSearchCV:**  
      - Mejores hiperparámetros (`best_params_`) y métrica ROC AUC (`best_score_`)  
-  9. **Evaluación en Validación:**  
+  9 **Evaluación en Validación:**  
      - Cálculo de métricas (accuracy, precision, recall, f1, AUC) sobre `X_val`  
      - Matriz de confusión y Curva ROC (RocCurveDisplay.from_predictions)  
-  10. **Guardado de Modelo y Scaler:**  
+  10 **Guardado de Modelo y Scaler:**  
       - `joblib.dump(final_model, "rf_final_model.pkl")`  
       - `joblib.dump(scaler, "scaler.pkl")`
 
@@ -66,25 +66,25 @@ notebooks/
   Profundizar en la comparación de métricas y justificación de la elección del RandomForest final. Proporciona análisis gráfico y estadístico de distintos modelos (RF, XGB, LightGBM, MLP, SVM, IsolationForest).
 
 - **Secciones Principales:**  
-  1. **Carga de Results de Entrenamiento:**  
+  1 **Carga de Results de Entrenamiento:**  
      - Importa resúmenes de métricas obtenidos en `01_training_pipeline.ipynb` para RF, XGB, LGBM, MLP, SVM e IsolationForest.  
-  2. **Comparación de Métricas por Modelo:**  
+  2 **Comparación de Métricas por Modelo:**  
      - Tabla comparativa de `accuracy`, `precision`, `recall`, `f1-score`, `AUC` para cada clasificador.  
      - Referencia: Amr (2020, p.95) sobre buenas prácticas en comparación de clasificadores.  
-  3. **Visualización de Curvas ROC:**  
+  3 **Visualización de Curvas ROC:**  
      - Muestra ROC curves lado a lado para todos los modelos usando `RocCurveDisplay`.  
      - Análisis de AUC para cada uno.  
-  4. **Matriz de Confusión Extendida:**  
+  4 **Matriz de Confusión Extendida:**  
      - Matrices para cada modelo, con anotaciones de falsos positivos vs. falsos negativos.
-  5. **Selección del Modelo Final:**  
+  5 **Selección del Modelo Final:**  
      - Justificación basada en métricas, balance entre detección de anomalías (recall clase 0) y baja tasa de falsos positivos (precision clase 0).  
      - Observación de tiempos de inferencia (valor clave para Raspberry Pi).  
      - Decisión: **RandomForestClassifier** como modelo óptimo (mejor AUC, buen trade-off velocidad vs. precisión).  
-  6. **Ejemplos de Inferencia Simulada:**  
+  6 **Ejemplos de Inferencia Simulada:**  
      - Carga del modelo `rf_final_model.pkl` y `scaler.pkl`.  
      - Predicción sobre un pequeño subconjunto simulado de datos “en tiempo real”.  
      - Verificación de consistencia con valores esperados (params threshold, etc.).  
-  7. **Conclusión y Próximos Pasos:**  
+  7 **Conclusión y Próximos Pasos:**  
      - Plan de despliegue en Raspberry Pi (inferencia con tlfte/cpu).  
 
 ---
