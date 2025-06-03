@@ -3,10 +3,15 @@
 Este directorio contiene todos los conjuntos de datos utilizados para entrenar, validar y probar nuestro modelo de integridad GPS en tiempo real. A continuación se describen los archivos y su propósito:
 
 ---
-├── data/                            
+
+├── data/        
+
 │   ├── train_data.csv               # 7 500 muestras reales + etiquetas sintéticas de spoofing
+
 │   ├── val_data.csv                 # Datos de validación (vuelo marzo 2025) + etiquetas
+
 │   └── test_data.csv                # Datos de prueba independientes + etiquetas
+
 
 ## 1. `train_data.csv`
 
@@ -24,8 +29,7 @@ Este directorio contiene todos los conjuntos de datos utilizados para entrenar, 
 - **Uso:**  
   - Entrenar el `RandomForestClassifier` (continuidad GPS).  
   - Como base para inyectar anomalías sintéticas (spoofing/jamming) si no contiene `Label`.  
-  - Referencia: Aceves-Fernandez (2023, p.86); Sarang (2023, p.43).
-
+  
 ---
 
 ## 2. `val_data.csv`
@@ -38,8 +42,7 @@ Este directorio contiene todos los conjuntos de datos utilizados para entrenar, 
 - **Uso:**  
   - Afinar hiperparámetros del modelo (GridSearchCV).  
   - Evaluar rendimiento durante el entrenamiento (no se usa para ajustar pesos del RandomForest).  
-  - Referencia: Amr (2020, p.54).
-
+ 
 ---
 
 ## 3. `test_data.csv`
@@ -52,7 +55,7 @@ Este directorio contiene todos los conjuntos de datos utilizados para entrenar, 
 - **Uso:**  
   - Evaluación final del modelo afinado.  
   - Cálculo de métricas definitivas: Accuracy, Precision, Recall, F1, AUC, Matriz de Confusión.  
-  - Simula comportamiento en datos nuevos no vistos (Amr, 2020, p.54).
+  - Simula comportamiento en datos nuevos no vistos.
 
 ---
 
