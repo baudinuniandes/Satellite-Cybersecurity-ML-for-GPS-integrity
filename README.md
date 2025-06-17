@@ -34,20 +34,19 @@ Satellite Cybersecurity, GPS, Machine Learning, Navigation Warfare, Spoofing, SP
 
 ```text
 ├── data/                            
-│   ├── train_data.csv               # 7 500 muestras reales + etiquetas sintéticas de spoofing
-│   ├── val_data.csv                 # Datos de validación (vuelo marzo 2025) + etiquetas
-│   └── test_data.csv                # Datos de prueba independientes + etiquetas
+│   ├── test_data.csv                      # 3032 muestras reales + etiquetas sintéticas de spoofing
+│   ├── train_data.csv                     # 7245 muestras reales + etiquetas sintéticas de spoofing
+│   └── val_data.csv                       # 1272 muestras reales + etiquetas sintéticas de spoofing
 │
 ├── notebooks/
-│   ├── training_pipeline.ipynb      # Notebook de Google Colab: limpieza, generación de anomalías, GridSearch, métricas
-│   └── model_selection_and_evaluation.ipynb  # Análisis detallado de métricas, curvas ROC y selección final de RF
+│   ├── rf_model_design.ipynb                # Notebook de Google Colab: limpieza, generación de anomalías, GridSearch, métricas
+│   └── model_selection_and_evaluation.ipynb # Análisis detallado de métricas, curvas ROC y selección final de RF
 │
 ├── models/
 │   ├── rf_final_model.pkl           # Modelo RandomForest entrenado con train+val
 │   └── scaler.pkl                   # StandardScaler para normalización de features
 │
 ├── scripts/
-│   ├── train_continuity_model.py    # Script de entrenamiento de RF (continuidad GPS) en PC
 │   ├── realtime_gps_status.py       # Script de Raspberry Pi: clasificación en tiempo real + control LED
 │   └── generate_spoofing.py         # Herramienta auxiliar para inyectar datos spoofing sintético en CSV
 │
