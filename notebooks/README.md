@@ -4,13 +4,13 @@ Este directorio contiene los cuadernos de Jupyter (Google Colab) donde se desarr
 
 ```text
 notebooks/
-  ├── 01_training_pipeline.ipynb
-  └── 02_model_selection_and_evaluation.ipynb
+  ├── rf_model_design.ipynb                
+  └── model_selection_and_evaluation.ipynb 
 ```
 
 ---
 
-## 1. `01_training_pipeline.ipynb`
+## 1. `rf_model_design.ipynb`
 
 - **Propósito:**  
   Implementar todo el flujo de entrenamiento paso a paso en Google Colab:
@@ -59,7 +59,7 @@ notebooks/
 
 ---
 
-## 2. `02_model_selection_and_evaluation.ipynb`
+## 2. `model_selection_and_evaluation.ipynb`
 
 - **Propósito:**  
   Profundizar en la comparación de métricas y justificación de la elección del RandomForest final. Proporciona análisis gráfico y estadístico de distintos modelos (RF, XGB, LightGBM, MLP, SVM, IsolationForest).
