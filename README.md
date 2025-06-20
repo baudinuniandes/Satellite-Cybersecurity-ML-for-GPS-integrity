@@ -45,20 +45,20 @@ Satellite Cybersecurity, GPS, Machine Learning, Navigation Warfare, Spoofing, SP
 
 ```text
 ├── data/                            
-│   ├── test_data.csv                      # 3032 muestras reales + etiquetas sintéticas de spoofing
-│   ├── train_data.csv                     # 7245 muestras reales + etiquetas sintéticas de spoofing
-│   └── val_data.csv                       # 1272 muestras reales + etiquetas sintéticas de spoofing
+│   ├── test_data.csv                         # 3032 muestras reales + etiquetas sintéticas de spoofing
+│   ├── train_data.csv                        # 7245 muestras reales + etiquetas sintéticas de spoofing
+│   └── val_data.csv                          # 1272 muestras reales + etiquetas sintéticas de spoofing
 │
 ├── notebooks/
 │   ├── rf_model_design.ipynb                # Notebook de Google Colab: limpieza, generación de anomalías, GridSearch, métricas
 │   └── model_selection_and_evaluation.ipynb # Análisis detallado de métricas, curvas ROC y selección final de RF
 │
 ├── models/
-│   ├── rf_final_model.pkl           # Modelo RandomForest entrenado con train+val
-│   └── scaler.pkl                   # StandardScaler para normalización de features
+│   ├── rf_final_model.pkl                   # Modelo RandomForest entrenado 
+│   └── scaler.pkl                           # StandardScaler para normalización de features
 │
 ├── scripts/
-│   ├── realtime_gps_status.py       # Script de Raspberry Pi: clasificación en tiempo real + control LED
-│   └── generate_spoofing.py         # Herramienta auxiliar para inyectar datos spoofing sintético en CSV
+│   ├── realtime_gps_status.py               # Script de Raspberry Pi: clasificación en tiempo real + control LED
+│   └── generate_spoofing.py                 # Herramienta auxiliar para inyectar datos spoofing sintético en CSV
 │
-└── README.md                        # Esta introducción creativa y descripción del proyecto
+└── README.md                                # Introducción y descripción del proyecto
