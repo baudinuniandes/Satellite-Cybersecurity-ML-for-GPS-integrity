@@ -33,7 +33,7 @@ Satellite Cybersecurity, GPS, Machine Learning, Navigation Warfare, Spoofing, SP
 ## 🔥  Amenazas comunes a los Sistemas Satelitales
 
 ### 🛰️  Segmento Espacial
-![Segmento Espacial](images/segmento_espacial.jpg)
+![Segmento Espacial](images/segmento_espacial2.jpg)
 
 ### 🕹️  Segmento de control
 ![Segmento de control](images/segmento_control.jpg)
