@@ -3,15 +3,10 @@ import pandas as pd
 import numpy as np
 import joblib
 from math import radians, sin, cos, sqrt, atan2, degrees
-from sklearn.model_selection import train_test_split
-from sklearn.metrics import classification_report, roc_auc_score
-from sklearn.neural_network import MLPClassifier
-from google.colab import files as gfiles
-
-# === SUBIR CSV ===
 from google.colab import files
 
-print("🔃 Sube aquí tu archivo gps_valid.csv (datos íntegros sin spoofing)")
+# === SUBIR CSV ===
+print("Sube aquí tu archivo gps_valid.csv (datos íntegros sin spoofing)")
 uploaded = files.upload()  # Selecciona gps_valid.csv
 
 # Nombre del CSV subido
@@ -23,7 +18,7 @@ df = pd.read_csv(CSV_FILE, parse_dates=["UTC"])
 df[["Lat","Lon"]] = df["Position"].str.split(",", expand=True).astype(float)
 df = df.sort_values("UTC").reset_index(drop=True)
 
-print(f"✅ Datos cargados: {len(df)} filas")
+print(f"Datos cargados: {len(df)} filas")
 # === CÁLCULO DE FEATURES DE CONTINUIDAD ===
 def haversine(lat1, lon1, lat2, lon2):
     R = 6371000  # radio terrestre en metros
@@ -54,7 +49,7 @@ def compute_continuity_features(df):
 cont_df = compute_continuity_features(df)
 y_clean = np.ones(len(cont_df), dtype=int)
 
-print(f"✅ {len(cont_df)} muestras de continuidad calculadas")
+print(f"{len(cont_df)} muestras de continuidad calculadas")
 
 # === GENERACIÓN DE ANOMALÍAS SINTÉTICAS ===
 SEED = 42
@@ -73,7 +68,7 @@ for j in idx:
     d_orig, b_orig = cont_df.loc[j, "dist"], cont_df.loc[j, "bearing"]
     lat0, lon0 = df.loc[j, "Lat"], df.loc[j, "Lon"] # Uso de la funcion Haversine para carcualar valores de latitud y longitud
 
-    # Generacion de parametros aleatorios fuera de ruta entre 5 y 50 kilometros (teniendo en cuenta que el radio esta en kilometros)
+    # Generacion de parametros aleatorios fuera de ruta entre 3 y 25 NM
     jump_d = np.random.uniform(5_000, 50_000)
     jump_b = np.random.uniform(0, 360)
 
@@ -121,4 +116,4 @@ y_anom = np.zeros(n_anom, dtype=int)
 X = np.vstack([cont_df.values, cont_anom_features])
 y = np.concatenate([y_clean, y_anom])
 
-print(f"✅ Dataset combinado: {X.shape[0]} muestras ({len(y_clean)} íntegros + {n_anom} anómalos)")
+print(f"Dataset combinado: {X.shape[0]} muestras ({len(y_clean)} íntegros + {n_anom} anómalos)")
